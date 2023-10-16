@@ -1,6 +1,8 @@
 # README for `sleepnumber` Application
 
-This repository contains the necessary files for building, testing, and deploying the `sleepnumber` application, which is designed to be a Lambda function hosted in AWS.
+This repository contains the necessary files for building, testing, and deploying the `sleepnumber` application which is an Alexa skill designed to control the SleepIQ bed settings. 
+
+The application is deployed as an image to AWS ECR and executing using Lambda. 
 
 ## Prerequisites
 
@@ -53,7 +55,7 @@ All requests and responses are logged for debugging purposes.
     - Contains a `CustomAbstractRequestHandler` class that initializes the SleepIQ client using the provided secrets.
     - Contains various request handlers for the intents.
     - Contains request and response logging interceptors.
-    
+
 ## Commands
 
 ### Build the Docker Image
