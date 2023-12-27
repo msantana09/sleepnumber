@@ -1,8 +1,11 @@
-# README for `sleepnumber` Application
+# `sleepnumber` Alexa Skill
 
 This repository contains the necessary files for building, testing, and deploying the `sleepnumber` application which is an Alexa skill designed to control the SleepIQ bed settings. 
 
 The application is deployed as an image to AWS ECR and executing using Lambda. 
+
+## Background
+There have been a few times where I couldn't find the remote control to my Sleepnumber bed, requiring me to use their iOS app to make adjustments. The load time of the app is incredibly long, and frustrating enough where I spent a weekend building this Alexa Skill to avoid using the app again :/
 
 ## Prerequisites
 
