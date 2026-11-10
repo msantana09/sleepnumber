@@ -4,7 +4,6 @@ from ask_sdk_core.skill_builder import SkillBuilder
 from common.config import config
 from services import (CatchAllExceptionHandler, IncreaseFirmness,SetFirmness, LaunchRequestHandler, RequestLogger, ResponseLogger, SessionEndedRequestHandler,
                       SkillConfigurationExceptionHandler, ValidationExceptionHandler, ExternalAPIExceptionHandler)
-from common.aws.secretsmanager import get_secret
 
 log_level = os.getenv('LOG_LEVEL', 'DEBUG').upper()
 logging.basicConfig(level=log_level)

@@ -2,7 +2,7 @@
 
 This repository contains the necessary files for building, testing, and deploying the `sleepnumber` application which is an Alexa skill designed to control the SleepIQ bed settings. 
 
-The application is deployed as an image to AWS ECR and executing using Lambda. 
+The application is deployed as an image to AWS ECR and runs on AWS Lambda. 
 
 ## Background
 There have been a few times where I couldn't find the remote control to my Sleepnumber bed, requiring me to use their iOS app to make adjustments. The load time of the app is incredibly long, and frustrating enough where I spent a weekend building this Alexa Skill to avoid using the app again :/
@@ -15,19 +15,19 @@ There have been a few times where I couldn't find the remote control to my Sleep
 
 ## Structure
 
-- **makerfile**: Contains a list of commands to build, test, and deploy the application to AWS.
+- **Makefile**: Contains a list of commands to build, test, and deploy the application to AWS.
 - **Dockerfile**: A Docker configuration file to build the Lambda function using AWS's Python 3.9 runtime.
 
 ## Configuration
 
 ### .env File
 
-Before running any of the make commands, ensure you have the required environment variables in a `.env` file. The `makerfile` expects the following variables:
+Before running any of the make commands, ensure you have the required environment variables in a `.env` file. The `Makefile` expects the following variables:
 
 - AWS_ECR_ACCOUNT_ID: Your AWS account ID for the ECR repository
 - AWS_ECR_REGION: AWS region for the ECR repository
 
-The other parameters like APP_NAME and APP_VERSION are already set in the `makerfile`.
+The other parameters like APP_NAME and APP_VERSION are already set in the `Makefile`.
 
 The application fetches secrets like `skill_id`, `username`, and `password` from AWS Secrets Manager.
 
@@ -49,7 +49,7 @@ All requests and responses are logged for debugging purposes.
 ## Implementation Details
 
 - **main.py**:
-    - Retrieves the skill secrets from AWS Secrets Manager.
+    - Gets the skill id from `common/config.py`, which loads the secrets from AWS Secrets Manager.
     - Initializes the Alexa skill.
     - Registers request handlers, exception handlers, and interceptors.
     - Exports the Lambda handler.

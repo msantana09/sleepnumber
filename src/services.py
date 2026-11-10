@@ -53,17 +53,24 @@ class SetFirmness(CustomAbstractRequestHandler):
         bed = self.sleepiq_client.beds_with_sleeper_status()[0]
 
         slots = handler_input.request_envelope.request.intent.slots
-        if "firmness" in slots:
-            firmness = int(slots["firmness"].value)
-            left_firmness = bed.left.data["sleepNumber"]
-            right_firmness = bed.right.data["sleepNumber"]
+        slot = (slots or {}).get("firmness")
+        if slot is None or slot.value is None:
+            return (
+                handler_input.response_builder.speak(prompts.LAUNCH_MESSAGE)
+                .ask(prompts.LAUNCH_MESSAGE)
+                .response
+            )
 
-            if left_firmness != firmness:
-                self.sleepiq_client.set_sleepnumber("L", firmness, bedId=bed.bedId)
-            if right_firmness != firmness:
-                self.sleepiq_client.set_sleepnumber("R", firmness, bedId=bed.bedId)
+        firmness = int(slot.value)
+        left_firmness = bed.left.data["sleepNumber"]
+        right_firmness = bed.right.data["sleepNumber"]
 
-        response = f"Sleepnumber is being  updated to {firmness}"
+        if left_firmness != firmness:
+            self.sleepiq_client.set_sleepnumber("L", firmness, bedId=bed.bedId)
+        if right_firmness != firmness:
+            self.sleepiq_client.set_sleepnumber("R", firmness, bedId=bed.bedId)
+
+        response = f"Sleepnumber is being updated to {firmness}"
         return handler_input.response_builder.speak(response).response
 
 
