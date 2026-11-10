@@ -5,7 +5,7 @@ This repository contains the necessary files for building, testing, and deployin
 The application is deployed as an image to AWS ECR and runs on AWS Lambda. 
 
 ## Background
-There have been a few times where I couldn't find the remote control to my Sleepnumber bed, requiring me to use their iOS app to make adjustments. The load time of the app is incredibly long, and frustrating enough where I spent a weekend building this Alexa Skill to avoid using the app again :/
+There have been a few times where I couldn't find the remote control to my Sleep Number bed, requiring me to use their iOS app to make adjustments. The app took long enough to load that I spent a weekend building this Alexa skill, so I could adjust the bed by voice.
 
 ## Prerequisites
 
