@@ -10,7 +10,6 @@ from ask_sdk_core.utils import is_request_type, is_intent_name
 from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model.response import Response
 from sleepyq import Sleepyq
-from exceptions import ( SkillConfigurationException, ValidationException, ExternalAPIException)
 import prompts
 from common.config import config
 
@@ -149,35 +148,3 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
         handler_input.response_builder.speak(prompts.ERROR_MESSAGE)
 
         return handler_input.response_builder.response
-    
-
-class SkillConfigurationExceptionHandler(AbstractExceptionHandler):
-    def can_handle(self, handler_input, exception):
-        return isinstance(exception, SkillConfigurationException)
-
-    def handle(self, handler_input, exception):
-        logger.error(exception, exc_info=True)
-        speech = "There was a configuration error with the skill. Please check the skill settings."
-        handler_input.response_builder.speak(speech).set_should_end_session(True)
-        return handler_input.response_builder.response
-
-class ValidationExceptionHandler(AbstractExceptionHandler):
-    def can_handle(self, handler_input, exception):
-        return isinstance(exception, ValidationException)
-
-    def handle(self, handler_input, exception):
-        logger.error(exception, exc_info=True)
-        speech = "Sorry, I didn't understand that. Please try again."
-        handler_input.response_builder.speak(speech).ask(speech)
-        return handler_input.response_builder.response
-
-class ExternalAPIExceptionHandler(AbstractExceptionHandler):
-    def can_handle(self, handler_input, exception):
-        return isinstance(exception, ExternalAPIException)
-
-    def handle(self, handler_input, exception):
-        logger.error(exception, exc_info=True)
-        speech = "Sorry, I can't access the external service right now. Please try again later."
-        handler_input.response_builder.speak(speech).set_should_end_session(True)
-        return handler_input.response_builder.response
- 
